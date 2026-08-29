@@ -246,3 +246,20 @@ if (require.main === module) {
     if (safety <= 0) console.log('❌ SAFETY HIT — possible infinite loop bug!');
     else console.log(`\n✅ Engine test complete. Winner: ${g.winner}, turns: ${g.turnCount}`);
 }
+
+// ---------- SERIALIZATION (stateless serverless doctrine) ----------
+UnoGame.prototype.toJSON = function () {
+    // everything in this class is plain data — methods live on the prototype
+    return JSON.parse(JSON.stringify({
+        players: this.players, drawPile: this.drawPile, discard: this.discard,
+        direction: this.direction, current: this.current, phase: this.phase,
+        winner: this.winner, turnCount: this.turnCount, log: this.log,
+        activeColor: this.activeColor, drawnCard: this.drawnCard
+    }));
+};
+
+UnoGame.fromJSON = function (data) {
+    const g = Object.create(UnoGame.prototype);
+    Object.assign(g, data);
+    return g;
+};
