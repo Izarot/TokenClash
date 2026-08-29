@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokenClash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="table.css">
+</head>
+<body>
+
+<header>
+    <svg width="26" height="26" viewBox="0 0 100 100">
+        <rect x="12" y="40" width="52" height="20" rx="8" fill="#ffffff" transform="rotate(-25 38 50)"/>
+        <rect x="36" y="40" width="52" height="20" rx="8" fill="#2ee6a8" transform="rotate(25 62 50)"/>
+    </svg>
+    <h1>TokenClash</h1>
+    <div class="header-controls">
+        <select id="speed-select" onchange="setSpeed(this.value)">
+            <option value="1600">Slow</option>
+            <option value="900" selected>Normal</option>
+            <option value="400">Fast</option>
+        </select>
+        <button id="pause-btn" onclick="togglePause()" style="display:none;">⏸ Pause</button>
+        <button id="new-match-btn" onclick="newMatch()" style="display:none;">New Match</button>
+    </div>
+</header>
+
+<!-- SETUP -->
+<div id="setup-panel" class="panel">
+    <h2>Seat the players</h2>
+    <div class="seat-row">
+        <select id="model-select"><option>Loading models...</option></select>
+        <input type="text" id="nickname-input" placeholder="Nickname">
+        <button onclick="seatPlayer()">+ Seat</button>
+    </div>
+    <div id="seats"></div>
+    <div class="setup-footer">
+        <span class="note">2–4 players. Spectators see all hands face-up.</span>
+        <button id="start-btn" onclick="startMatch()" disabled>▶ Start Match</button>
+    </div>
+    <div id="resume-row" style="display:none;">
+        <button id="resume-btn" class="accent">↻ Resume saved match</button>
+    </div>
+</div>
+
+<!-- TABLE -->
+<div id="table-panel" class="panel" style="display:none;">
+    <div class="table-top">
+        <div class="pile">
+            <div class="label">DRAW PILE</div>
+            <div id="pile-count" class="pile-count">–</div>
+        </div>
+        <div class="discard">
+            <div class="label">DISCARD · ACTIVE COLOR</div>
+            <div class="discard-row">
+                <div id="top-card"></div>
+                <div class="active-wrap"><div id="active-color"></div></div>
+            </div>
+        </div>
+        <div class="pile">
+            <div class="label">DIRECTION</div>
+            <div id="direction" class="pile-count">–</div>
+        </div>
+    </div>
+
+    <div id="winner-banner"></div>
+    <div id="players-strip"></div>
+
+    <div class="bottom-panels">
+        <div class="log-wrap">
+            <div class="label">MATCH LOG</div>
+            <div id="log"></div>
+        </div>
+        <div class="chat-wrap">
+            <div class="label">TABLE CHAT (TAUNTS)</div>
+            <div id="chat"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -222,10 +222,12 @@ class UnoGame {
     }
 }
 
-module.exports = { UnoGame, buildDeck, shuffle };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { UnoGame, buildDeck, shuffle };
+}
 
 // ---------- STANDALONE SANITY TEST: `node engine.js` ----------
-if (require.main === module) {
+if (typeof require !== 'undefined' && require.main === module) {
     const g = new UnoGame(['GPT', 'Gemini', 'Llama', 'Mistral']);
     let safety = 5000;
     while (g.phase !== 'over' && safety-- > 0) {
